@@ -1,4 +1,4 @@
-package dev.danvega.functions;
+package com.example.mappingagent.functions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

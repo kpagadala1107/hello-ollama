@@ -1,13 +1,10 @@
 package com.example.mappingagent.service;
 
 import com.example.mappingagent.model.JsonNode;
-import com.theokanning.openai.service.OpenAiService;
-import com.theokanning.openai.completion.chat.*;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,19 +12,13 @@ import java.util.Map;
 @Service
 public class LLMService {
 
-    @Value("${openai.api.key}")
-    private String openAiApiKey;
+    private final ChatClient chatClient;
 
-    @Value("${openai.model:gpt-4}")
-    private String model;
+    public LLMService(ChatClient.Builder builder) {
+        this.chatClient = builder.build();
+    }
 
     public Map<String, String> findSemanticMatches(List<JsonNode> sourceFields, List<JsonNode> targetFields) {
-        if (openAiApiKey == null || openAiApiKey.isEmpty()) {
-            return Map.of(); // Fall back to non-LLM matching
-        }
-
-        OpenAiService service = new OpenAiService(openAiApiKey, Duration.ofSeconds(60));
-
         // Prepare the prompt
         String sourceFieldsStr = String.join(", ", sourceFields.stream().map(JsonNode::getName).toList());
         String targetFieldsStr = String.join(", ", targetFields.stream().map(JsonNode::getName).toList());
@@ -46,17 +37,14 @@ public class LLMService {
                 4. Related concepts (e.g., "price" and "amount")
                 """.formatted(sourceFieldsStr, targetFieldsStr);
 
-        ChatCompletionRequest request = ChatCompletionRequest.builder()
-                .model(model)
-                .messages(List.of(new ChatMessage("user", prompt)))
-                .temperature(0.2)
-                .maxTokens(500)
-                .build();
+        String response = chatClient.prompt()
+                .user(prompt)
+                .call()
+                .content();
 
-        ChatCompletionResult result = service.createChatCompletion(request);
-        String response = result.getChoices().get(0).getMessage().getContent();
+        assert response != null;
+        return  parseLlmResponse(response);
 
-        return parseLlmResponse(response);
     }
 
     private Map<String, String> parseLlmResponse(String response) {

@@ -1,4 +1,4 @@
-package dev.danvega.functions;
+package com.example.mappingagent.functions;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.GetMapping;

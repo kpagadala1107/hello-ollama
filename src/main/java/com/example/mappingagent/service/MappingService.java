@@ -1,8 +1,9 @@
 package com.example.mappingagent.service;
 
-import com.example.mappingagent.model.*;
 import com.example.mappingagent.model.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.mappingagent.model.MappingConfiguration;
+import com.example.mappingagent.model.MappingRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

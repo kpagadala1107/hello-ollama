@@ -1,6 +1,6 @@
-package dev.danvega;
+package com.example.mappingagent;
 
-import dev.danvega.functions.WeatherConfigProperties;
+import com.example.mappingagent.functions.WeatherConfigProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

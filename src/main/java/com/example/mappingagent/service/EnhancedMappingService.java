@@ -1,13 +1,14 @@
 package com.example.mappingagent.service;
 
-import com.example.mappingagent.model.*;
-import com.example.mappingagent.service.EnhancedSimilarityService;
-
+import com.example.mappingagent.model.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.mappingagent.model.MappingConfiguration;
+import com.example.mappingagent.model.MappingRule;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class EnhancedMappingService {

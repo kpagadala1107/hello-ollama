@@ -1,10 +1,13 @@
 package com.example.mappingagent.controller;
 
-import com.example.mappingagent.model.MappingConfiguration;
 import com.example.mappingagent.model.JsonNode;
+import com.example.mappingagent.model.MappingConfiguration;
 import com.example.mappingagent.service.MappingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/mapping")

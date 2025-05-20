@@ -1,6 +1,8 @@
 package com.example.mappingagent.model;
 
+import com.example.mappingagent.model.MappingRule;
 import lombok.Data;
+
 import java.util.List;
 
 @Data
