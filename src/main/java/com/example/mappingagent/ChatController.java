@@ -11,12 +11,13 @@ public class ChatController {
 
     public ChatController(ChatClient.Builder builder) {
         this.chatClient = builder.build();
+        System.out.println(this.chatClient);
     }
 
     @GetMapping("")
     public String home() {
         return chatClient.prompt()
-                .user("Tell me a dad joke about dogs")
+                .user("Tell me a dad joke about Technology")
                 .call()
                 .content();
     }
